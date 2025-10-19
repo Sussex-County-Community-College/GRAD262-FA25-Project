@@ -36,7 +36,7 @@ public class PlayerControls : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow))
             spells.Earthquake();
         if (Input.GetKeyDown(KeyCode.LeftArrow))
-            spells.Firebolt();
+            spells.Fireball();
         if (Input.GetKeyDown(KeyCode.RightArrow))
             spells.WaterSplash();
 

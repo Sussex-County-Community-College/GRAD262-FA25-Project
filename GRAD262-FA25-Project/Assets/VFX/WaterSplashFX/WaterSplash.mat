@@ -60,7 +60,7 @@ Material:
     - _Bottom_Height: 0
     - _CastShadows: 0
     - _Cull: 0
-    - _Dissolve_Scale: 15.01
+    - _Dissolve_Scale: 40
     - _Distortion: 0.2
     - _Distortion_Scale: 10
     - _DstBlend: 10

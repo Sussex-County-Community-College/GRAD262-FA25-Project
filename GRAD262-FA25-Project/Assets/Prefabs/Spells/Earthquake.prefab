@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8160834046992629383}
   - component: {fileID: 4839787087967795484}
   - component: {fileID: 3437859595929068769}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EarthCracks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4909,7 +4909,7 @@ GameObject:
   - component: {fileID: 8836597732692584264}
   - component: {fileID: 1515860780006080138}
   - component: {fileID: 7842882497311096166}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Dust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9805,7 +9805,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7778558353640700662}
   - component: {fileID: 4223256024232739457}
-  m_Layer: 0
+  - component: {fileID: -6094867271935483605}
+  m_Layer: 10
   m_Name: Earthquake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9843,9 +9844,23 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 3.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-6094867271935483605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8456595071387797448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7f9ec69af8ed3942bae9964bd4c2ecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  tagOnImpact: Enemy

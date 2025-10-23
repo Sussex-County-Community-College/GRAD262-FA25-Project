@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 3478337961322495177}
   - component: {fileID: 4567559825640485379}
   - component: {fileID: 4409980459145462471}
-  m_Layer: 0
+  - component: {fileID: -4128687528638980465}
+  m_Layer: 10
   m_Name: WaterSplash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +50,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -70,6 +71,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  destroy: 0
+  destroyTime: 0
+--- !u!114 &-4128687528638980465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3584280672332480159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7f9ec69af8ed3942bae9964bd4c2ecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  tagOnImpact: Enemy
 --- !u!1 &7771427909946243728
 GameObject:
   m_ObjectHideFlags: 0
@@ -81,7 +98,7 @@ GameObject:
   - component: {fileID: 5178417148162018675}
   - component: {fileID: 1208722365146625124}
   - component: {fileID: 7684285022054649393}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}

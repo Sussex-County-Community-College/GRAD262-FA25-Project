@@ -7,6 +7,7 @@ public class PlayerControls : MonoBehaviour
     public float moveSpeed;
     public float rotationSpeed;
     public Spells spells;
+    public float health;
 
     
     
@@ -40,5 +41,12 @@ public class PlayerControls : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow))
             spells.WaterSplash();
 
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health = damage;
+
+        if(health <= 0) { Destroy(gameObject); }
     }
 }

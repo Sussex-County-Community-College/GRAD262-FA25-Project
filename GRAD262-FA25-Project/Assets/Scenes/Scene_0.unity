@@ -475,7 +475,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &737509492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -920,7 +920,7 @@ GameObject:
   - component: {fileID: 1583025901}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1030,6 +1030,9 @@ MonoBehaviour:
   rotationSpeed: 3000
   spells: {fileID: 1583025901}
   health: 10
+  invincibleDuration: 0.3
+  playerMaterial: {fileID: 2100000, guid: f5ed795b06461e74994219a8f9a36df7, type: 2}
+  flashDuration: 0.2
 --- !u!114 &1583025901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1044,6 +1047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camShake: {fileID: 963194230}
   lightningStrike: {fileID: 7050627791936788131, guid: e1a46a569c2577248985ff14095f363c, type: 3}
+  lightningCharge: {fileID: 7878316998882892834, guid: e1c3fda297bebdf4caa81cc4b65e263f, type: 3}
   lightningSpawnDistance: 10
   lightningDuration: 1
   lightningDamage: 10
@@ -1328,7 +1332,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &1973985066
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1465,7 +1469,7 @@ MonoBehaviour:
   rotSpeed: 1000
   timeBetweenAttacks: 1
   attackRange: 8
-  deathDuration: 0
+  deathDuration: 0.3
   attackDamage: 2
   playerInAttackRange: 0
 --- !u!54 &1973985072

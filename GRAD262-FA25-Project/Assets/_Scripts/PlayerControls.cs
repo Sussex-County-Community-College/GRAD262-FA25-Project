@@ -9,11 +9,17 @@ public class PlayerControls : MonoBehaviour
     public Spells spells;
     public float health;
 
+    private bool invincible = false;
+    public float invincibleDuration;
+    public Material playerMaterial;
+    private Color flashColor = Color.white;
+    private Color originalColor;
+    public float flashDuration = 0.1f;
     
     
     void Start()
     {
-        
+        originalColor = playerMaterial.color;
     }
 
     void Update()
@@ -31,10 +37,14 @@ public class PlayerControls : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
 
+        GameObject lightningCharge = null;
         //Spell casting controls
         if (Input.GetKeyDown(KeyCode.UpArrow))
+            lightningCharge = spells.LightingChargeStart();
+        if (Input.GetKeyUp(KeyCode.UpArrow))
             spells.LightningStrike();
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+
+                if (Input.GetKeyDown(KeyCode.DownArrow))
             spells.Earthquake();
         if (Input.GetKeyDown(KeyCode.LeftArrow))
             spells.Fireball();
@@ -45,8 +55,26 @@ public class PlayerControls : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        health = damage;
+        if (!invincible)
+        {
+            health -= damage;
+            invincible = true;
+            StartCoroutine(DamageFlash());
+            Invoke("ResetInvincible", invincibleDuration);
+        }
 
-        if(health <= 0) { Destroy(gameObject); }
+        if (health <= 0) { Debug.Log("Player is Dead :("); }
+    }
+
+    private void ResetInvincible()
+    {
+        invincible = false;
+    }
+
+    private IEnumerator DamageFlash()
+    {
+        playerMaterial.color = flashColor;
+        yield return new WaitForSeconds(flashDuration);
+        playerMaterial.color = originalColor;
     }
 }

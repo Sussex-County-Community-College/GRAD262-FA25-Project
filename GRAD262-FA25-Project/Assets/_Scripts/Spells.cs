@@ -9,6 +9,7 @@ public class Spells : MonoBehaviour
 
     [Header("Lightning Bolt")]
     public GameObject lightningStrike;
+    public GameObject lightningCharge;
     public float lightningSpawnDistance;
     public float lightningDuration;
     public int lightningDamage;
@@ -33,9 +34,16 @@ public class Spells : MonoBehaviour
     public float earthquakeDuration;
     public int earthquakeDamage;
 
+    public GameObject LightingChargeStart()
+    {
+        Vector3 spawnPos = transform.position + transform.forward * lightningSpawnDistance;
+        Quaternion spawnRot = new Quaternion(0, 0, 90, 0);
+        GameObject newlightningCharge = Instantiate(lightningCharge, spawnPos, spawnRot);
+        return lightningCharge;
+    }
+    
     public void LightningStrike()
     {
-        Debug.Log("You casted Lightning Strike!");
         Vector3 spawnPos = transform.position + transform.forward * lightningSpawnDistance;
         Quaternion lightningRotation = new Quaternion(0, 0, 0, 0);
         GameObject newLightningStrike = Instantiate(lightningStrike, spawnPos, lightningRotation);
@@ -44,7 +52,6 @@ public class Spells : MonoBehaviour
     }
     public void Earthquake()
     {
-        Debug.Log("You casted Earthquake!");
         Vector3 spawnPos = transform.position + transform.up * earthquakeSpawnDistance;
         GameObject newEarthquake = Instantiate(earthquake, spawnPos, transform.rotation);
         newEarthquake.GetComponent<Attack>().damage = earthquakeDamage;
@@ -54,7 +61,6 @@ public class Spells : MonoBehaviour
     }
     public void Fireball()
     {
-        Debug.Log("You casted Fireball!");
         Vector3 spawnPos = transform.position + transform.forward * fireSpawnDistance;
         GameObject newfireball = Instantiate(fireball, spawnPos, transform.rotation);
         newfireball.GetComponent<Attack>().damage = fireDamage;
@@ -62,11 +68,12 @@ public class Spells : MonoBehaviour
     }
     public void WaterSplash()
     {
-        Debug.Log("You casted Water Splash!");
         Vector3 spawnPos = transform.position + transform.forward * waterSpawnDistance;
         GameObject newWaterSplash = Instantiate(waterSplash, spawnPos, transform.rotation);
         newWaterSplash.GetComponent<Attack>().damage = waterDamage;
         Destroy(newWaterSplash, waterDuration);
     }
+
+    
 
 }

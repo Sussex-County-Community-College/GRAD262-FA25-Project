@@ -11,10 +11,18 @@ public class Attack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag(tagOnImpact))
         {
-            EnemyAI enemy = other.GetComponent<EnemyAI>();
-            enemy.TakeDamage(damage);
+            if(tagOnImpact == "Enemy")
+            {
+                EnemyAI enemy = other.GetComponent<EnemyAI>();
+                enemy.TakeDamage(damage);
+            }
+            if(tagOnImpact == "Player")
+            {
+                PlayerControls player = other.GetComponent<PlayerControls>();
+                player.TakeDamage(damage);
+            }
         }
             
     }

@@ -9863,4 +9863,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  tagOnImpact: Enemy
+  intendedTarget: Enemy
+  knockBackForce: 0
+  forceDelay: 0

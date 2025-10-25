@@ -135,4 +135,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
-  tagOnImpact: Player
+  intendedTarget: Player
+  knockBackForce: 5
+  forceDelay: 0.15

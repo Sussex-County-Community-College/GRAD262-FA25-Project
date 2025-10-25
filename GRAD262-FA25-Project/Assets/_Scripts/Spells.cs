@@ -47,14 +47,14 @@ public class Spells : MonoBehaviour
         Vector3 spawnPos = transform.position + transform.forward * lightningSpawnDistance;
         Quaternion lightningRotation = new Quaternion(0, 0, 0, 0);
         GameObject newLightningStrike = Instantiate(lightningStrike, spawnPos, lightningRotation);
-        newLightningStrike.GetComponent<Attack>().damage = lightningDamage;
+        DefineAttack(newLightningStrike, lightningDamage);
         Destroy(newLightningStrike, lightningDuration);
     }
     public void Earthquake()
     {
         Vector3 spawnPos = transform.position + transform.up * earthquakeSpawnDistance;
         GameObject newEarthquake = Instantiate(earthquake, spawnPos, transform.rotation);
-        newEarthquake.GetComponent<Attack>().damage = earthquakeDamage;
+        DefineAttack(newEarthquake, earthquakeDamage);
         camShake.TriggerShake(EQShakeDuration, EQShakeAmount);
         
         Destroy(newEarthquake, earthquakeDuration);
@@ -63,17 +63,22 @@ public class Spells : MonoBehaviour
     {
         Vector3 spawnPos = transform.position + transform.forward * fireSpawnDistance;
         GameObject newfireball = Instantiate(fireball, spawnPos, transform.rotation);
-        newfireball.GetComponent<Attack>().damage = fireDamage;
+        DefineAttack(newfireball, fireDamage);
         Destroy(newfireball, fireDuration);
     }
     public void WaterSplash()
     {
         Vector3 spawnPos = transform.position + transform.forward * waterSpawnDistance;
         GameObject newWaterSplash = Instantiate(waterSplash, spawnPos, transform.rotation);
-        newWaterSplash.GetComponent<Attack>().damage = waterDamage;
+        DefineAttack(newWaterSplash, waterDamage);
         Destroy(newWaterSplash, waterDuration);
     }
 
-    
+    private void DefineAttack(GameObject spell, int damage)
+    {
+        Attack attack = spell.GetComponent<Attack>();
+        attack.damage = damage;
+        attack.intendedTarget = "Enemy";
+    }
 
 }

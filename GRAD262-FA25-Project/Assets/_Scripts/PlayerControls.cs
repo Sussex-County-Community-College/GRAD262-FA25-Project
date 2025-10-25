@@ -6,20 +6,27 @@ public class PlayerControls : MonoBehaviour
 {
     public float moveSpeed;
     public float rotationSpeed;
-    public Spells spells;
-    public float health;
 
-    private bool invincible = false;
+    public float health;
     public float invincibleDuration;
     public Material playerMaterial;
+    public float flashDuration = 0.1f;
+
+    private bool invincible = false;
     private Color flashColor = Color.white;
     private Color originalColor;
-    public float flashDuration = 0.1f;
-    
-    
+    private Rigidbody rb;
+    private Spells spells;
+    private KnockBack KnockBack;
+
+
+
     void Start()
     {
         originalColor = playerMaterial.color;
+        rb = GetComponent<Rigidbody>();
+        spells = GetComponent<Spells>();
+        KnockBack = GetComponent<KnockBack>();
     }
 
     void Update()
@@ -53,12 +60,13 @@ public class PlayerControls : MonoBehaviour
 
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, GameObject attacker, float knockBackForce, float forceDelay)
     {
         if (!invincible)
         {
             health -= damage;
             invincible = true;
+            KnockBack.KnockBackEffect(attacker, knockBackForce, forceDelay);
             StartCoroutine(DamageFlash());
             Invoke("ResetInvincible", invincibleDuration);
         }
@@ -74,7 +82,16 @@ public class PlayerControls : MonoBehaviour
     private IEnumerator DamageFlash()
     {
         playerMaterial.color = flashColor;
-        yield return new WaitForSeconds(flashDuration);
+        yield return new WaitForSeconds(flashDuration/3);
+        playerMaterial.color = originalColor;
+        yield return new WaitForSeconds(flashDuration/3);
+        playerMaterial.color = flashColor;
+        yield return new WaitForSeconds(flashDuration/3);
+        playerMaterial.color = originalColor;
+    }
+
+    private void OnApplicationQuit()
+    {
         playerMaterial.color = originalColor;
     }
 }

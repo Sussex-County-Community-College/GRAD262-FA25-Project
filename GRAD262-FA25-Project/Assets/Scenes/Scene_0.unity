@@ -469,6 +469,7 @@ GameObject:
   - component: {fileID: 737509494}
   - component: {fileID: 737509493}
   - component: {fileID: 737509492}
+  - component: {fileID: 737509499}
   m_Layer: 8
   m_Name: MeleeEnemy
   m_TagString: Enemy
@@ -488,7 +489,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48c77595b8840e848b6827a52ce166db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1583025899}
   projectile: {fileID: 9029911594035116841, guid: 3d80a6c5eb0284b4ca63eb16b54dcb1a, type: 3}
   agent: {fileID: 737509493}
   whatIsGround:
@@ -501,9 +501,10 @@ MonoBehaviour:
   rotSpeed: 1000
   timeBetweenAttacks: 1
   attackRange: 8
-  deathDuration: 0
-  attackDamage: 2
-  playerInAttackRange: 0
+  deathDuration: 0.3
+  attackDamage: 5
+  rangedEnemy: 0
+  attackKnockBackForce: 10
 --- !u!195 &737509493
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -642,6 +643,22 @@ Transform:
   - {fileID: 265057225}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &737509499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737509491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7f9ec69af8ed3942bae9964bd4c2ecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 3
+  intendedTarget: Player
+  knockBackForce: 10
+  forceDelay: 0.15
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,8 +721,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 7.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -916,6 +933,7 @@ GameObject:
   - component: {fileID: 1583025897}
   - component: {fileID: 1583025896}
   - component: {fileID: 1583025902}
+  - component: {fileID: 1583025903}
   - component: {fileID: 1583025900}
   - component: {fileID: 1583025901}
   m_Layer: 7
@@ -1028,11 +1046,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 12
   rotationSpeed: 3000
-  spells: {fileID: 1583025901}
   health: 10
   invincibleDuration: 0.3
   playerMaterial: {fileID: 2100000, guid: f5ed795b06461e74994219a8f9a36df7, type: 2}
-  flashDuration: 0.2
+  flashDuration: 0.3
 --- !u!114 &1583025901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1088,10 +1105,22 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 1
+--- !u!114 &1583025903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583025895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0f2bd53cb98c58449ad4cf2e6105096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1623457987
 GameObject:
   m_ObjectHideFlags: 0
@@ -1326,6 +1355,7 @@ GameObject:
   - component: {fileID: 1973985072}
   - component: {fileID: 1973985070}
   - component: {fileID: 1973985071}
+  - component: {fileID: 1973985073}
   m_Layer: 8
   m_Name: RangedEnemy
   m_TagString: Enemy
@@ -1415,7 +1445,7 @@ Transform:
   m_GameObject: {fileID: 1973985065}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -6.55, y: 0.94, z: 4.06}
+  m_LocalPosition: {x: 7.71, y: 0.94, z: 4.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1456,7 +1486,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48c77595b8840e848b6827a52ce166db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1583025899}
   projectile: {fileID: 9029911594035116841, guid: 3d80a6c5eb0284b4ca63eb16b54dcb1a, type: 3}
   agent: {fileID: 1973985070}
   whatIsGround:
@@ -1471,7 +1500,8 @@ MonoBehaviour:
   attackRange: 8
   deathDuration: 0.3
   attackDamage: 2
-  playerInAttackRange: 0
+  rangedEnemy: 1
+  attackKnockBackForce: 5
 --- !u!54 &1973985072
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1499,6 +1529,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &1973985073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973985065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7f9ec69af8ed3942bae9964bd4c2ecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 3
+  intendedTarget: Player
+  knockBackForce: 10
+  forceDelay: 0.15
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

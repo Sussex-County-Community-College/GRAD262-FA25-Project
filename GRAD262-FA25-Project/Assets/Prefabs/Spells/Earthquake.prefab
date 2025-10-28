@@ -9806,6 +9806,7 @@ GameObject:
   - component: {fileID: 7778558353640700662}
   - component: {fileID: 4223256024232739457}
   - component: {fileID: -6094867271935483605}
+  - component: {fileID: 8147476287217826194}
   m_Layer: 10
   m_Name: Earthquake
   m_TagString: Untagged
@@ -9862,7 +9863,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f9ec69af8ed3942bae9964bd4c2ecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 10
   intendedTarget: Enemy
   knockBackForce: 0
   forceDelay: 0
+--- !u!114 &8147476287217826194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8456595071387797448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f462578ba0077d34f80a2dc1e580c235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitBoxDuration: 0.2

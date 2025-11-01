@@ -47,4 +47,9 @@ public class CameraShake : MonoBehaviour
         shakeDuration = duration;
         shakeAmount = amount;
     }
+
+    public void SetOriginalPos(Vector3 pos)
+    {
+        originalPos = pos;
+    }
 }

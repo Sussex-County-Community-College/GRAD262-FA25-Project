@@ -13,18 +13,21 @@ public class Spells : MonoBehaviour
     public float lightningSpawnDistance;
     public float lightningDuration;
     public int lightningDamage;
+    public int lightningManaCost;
 
     [Header("Fireball")]
     public GameObject fireball;
     public float fireSpawnDistance;
     public float fireDuration;
     public int fireDamage;
+    public int fireManaCost;
 
     [Header("Water Splash")]
     public GameObject waterSplash;
     public float waterSpawnDistance;
     public float waterDuration;
     public int waterDamage;
+    public int waterManaCost;
 
     [Header("Earthquake")]
     public GameObject earthquake;
@@ -33,6 +36,7 @@ public class Spells : MonoBehaviour
     public float EQShakeAmount;
     public float earthquakeDuration;
     public int earthquakeDamage;
+    public int earthquakeManaCost;
 
     public GameObject LightingChargeStart()
     {

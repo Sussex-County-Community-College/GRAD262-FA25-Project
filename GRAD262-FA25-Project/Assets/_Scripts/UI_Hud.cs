@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class UI_Hud : MonoBehaviour
 {
-    public float health, maxHealth, width, height;
+    public float health, maxHealth, width, height, mana, maxMana;
     public RectTransform healthbar;
+    public RectTransform manabar;
     public Text XP;
     public Image UpSpell;
     public Image DownSpell;
@@ -23,6 +24,18 @@ public class UI_Hud : MonoBehaviour
         this.health = health;
         float newWidth = (health / maxHealth) * width;
         healthbar.sizeDelta = new Vector2(newWidth, height);
+    }
+
+    public void SetMaxMana(float maxMana)
+    {
+        this.maxMana = maxMana;
+    }
+
+    public void SetMana(float mana)
+    {
+        this.mana = mana;
+        float newWidth = (mana / maxMana) * width;
+        manabar.sizeDelta = new Vector2(newWidth, height);
     }
 
     public void SetXP(int xp)

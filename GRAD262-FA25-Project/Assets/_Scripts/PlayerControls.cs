@@ -9,6 +9,7 @@ public class PlayerControls : MonoBehaviour
     public UI_Hud hud;
     public float moveSpeed; 
     public float health, maxHealth;
+    public float mana, maxMana, manaRegnRate;
     public int XP = 0;
     public float invincibleDuration;
     public float flashDuration;
@@ -30,8 +31,11 @@ public class PlayerControls : MonoBehaviour
         spells = GetComponent<Spells>();
         KnockBack = GetComponent<KnockBack>();
         rb = GetComponent<Rigidbody>();
+        hud.SetMaxHealth(maxHealth);
+        hud.SetMana(maxMana);
 
-        
+        //Calls a infinite looping method that will recover mana slowly over time.
+        StartCoroutine(RecoverMana());
     }
 
     void Update()
@@ -55,22 +59,26 @@ public class PlayerControls : MonoBehaviour
 
         //UpSpell casting controls
         GameObject lightningCharge = null;
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) && mana >= spells.lightningManaCost)
         {
             lightningCharge = spells.LightingChargeStart();
             hud.SetSpellIcon("Up", Color.gray);
         }
-        if (Input.GetKeyUp(KeyCode.UpArrow))
+        if (Input.GetKeyUp(KeyCode.UpArrow) && mana >= spells.lightningManaCost)
         {
             spells.LightningStrike();
             hud.SetSpellIcon("Up", Color.white);
+            mana -= spells.lightningManaCost;
+            hud.SetMana(mana);
         }
 
         //DownSpell casting controls
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow) && mana >= spells.earthquakeManaCost)
         {
             spells.Earthquake();
             hud.SetSpellIcon("Down", Color.gray);
+            mana -= spells.earthquakeManaCost;
+            hud.SetMana(mana);
         }
         if(Input.GetKeyUp(KeyCode.DownArrow))
         {
@@ -78,10 +86,12 @@ public class PlayerControls : MonoBehaviour
         }
 
         //LeftSpell casting controls
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && mana >= spells.fireManaCost)
         {
             spells.Fireball();
             hud.SetSpellIcon("Left", Color.gray);
+            mana -= spells.fireManaCost;
+            hud.SetMana(mana);
         }
         if(Input.GetKeyUp(KeyCode.LeftArrow))
         {
@@ -89,10 +99,12 @@ public class PlayerControls : MonoBehaviour
         }
 
         //RightSpell casting controls
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow) && mana >= spells.waterManaCost)
         {
             spells.WaterSplash();
             hud.SetSpellIcon("Right", Color.gray);
+            mana -= spells.waterManaCost;
+            hud.SetMana(mana);
         }
         if( Input.GetKeyUp(KeyCode.RightArrow))
         {
@@ -120,6 +132,25 @@ public class PlayerControls : MonoBehaviour
         }
 
         if (health <= 0) { Debug.Log("Player is Dead :("); } //This will eventually link to a game over system.
+    }
+
+    //Recovers mana by a publicly defined rate.
+    //Loops infinitly
+    private IEnumerator RecoverMana()
+    {
+        bool repeat = true;
+
+        while (repeat)
+        {
+            mana++;
+            mana = Mathf.Clamp(mana, 0, maxMana);
+            hud.SetMana(mana);
+
+            yield return new WaitForSeconds(manaRegnRate);
+
+
+        }
+        
     }
 
     //After the public amount of invincible duration, the bool will be reset to allow the player to once again take damage.

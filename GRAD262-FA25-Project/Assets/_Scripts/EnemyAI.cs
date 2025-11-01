@@ -25,16 +25,18 @@ public class EnemyAI : MonoBehaviour
 
     private GameObject player;
     private PlayerControls playerControls;
+    private RoomManager roomManager;
     private bool playerInAttackRange;
     private bool alreadyAttacked = false;
 
-    private void Start()
+    private void OnEnable()
     {
         player = GameObject.Find("Player"); //Finds the player to follow them.
 
         //Retrieves components from the player and enemy.
         playerControls = player.GetComponent<PlayerControls>();
         agent = GetComponent<NavMeshAgent>();
+        roomManager = GetComponentInParent<RoomManager>();
 
         //Restricts the navMesh from rotating the enemy, this will be handled manually.
         agent.updateRotation = false;
@@ -123,6 +125,7 @@ public class EnemyAI : MonoBehaviour
         {
             Invoke(nameof(DestroyEnemy), deathDuration);
             playerControls.XP += XP_Gained;
+            roomManager.DecreaseEnemies();
         }
             
     }

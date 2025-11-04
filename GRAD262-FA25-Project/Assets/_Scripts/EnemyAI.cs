@@ -28,6 +28,7 @@ public class EnemyAI : MonoBehaviour
     private RoomManager roomManager;
     private bool playerInAttackRange;
     private bool alreadyAttacked = false;
+    private bool dying = false;
 
     private void OnEnable()
     {
@@ -48,7 +49,7 @@ public class EnemyAI : MonoBehaviour
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         //Makes the enemy always look at the player.
-        transform.LookAt(player.transform.position);
+        transform.LookAt(player.transform.position + Vector3.up);
 
         //Ranged Enemy States
         if (playerInAttackRange && rangedEnemy) 
@@ -121,11 +122,13 @@ public class EnemyAI : MonoBehaviour
         health -= damage;
 
         //Destroys the enemy when they reach 0 HP.
-        if(health <= 0)
+        if(health <= 0 && !dying)
         {
+            
             Invoke(nameof(DestroyEnemy), deathDuration);
             playerControls.XP += XP_Gained;
             roomManager.DecreaseEnemies();
+            dying = true;
         }
             
     }

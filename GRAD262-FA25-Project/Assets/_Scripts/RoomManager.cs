@@ -16,6 +16,7 @@ public class RoomManager : MonoBehaviour
     {
         camController = GameObject.Find("Main Camera").GetComponent<CameraController>();
         enemyCnt = enemies.Length;
+        Time.timeScale = 1f;
     }
     
     private void Update()

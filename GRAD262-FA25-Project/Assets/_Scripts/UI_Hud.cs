@@ -13,6 +13,12 @@ public class UI_Hud : MonoBehaviour
     public Image DownSpell;
     public Image LeftSpell;
     public Image RightSpell;
+    public GameObject FadeInPanel;
+
+    private void Awake()
+    {
+        FadeInPanel.SetActive(true);
+    }
 
     public void SetMaxHealth(float maxHealth)
     {
